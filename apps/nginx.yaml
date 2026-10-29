@@ -1,0 +1,16 @@
+image:
+  repository: nginx
+
+service:
+  port: 8080 # for external traffic
+  targetPort: 80 # port in container
+  nodePort: 30080
+  type: NodePort
+
+environment:
+  # secret:
+  configMap:
+
+volumes:
+  declarations:
+  list:

@@ -1,0 +1,36 @@
+
+
+{{- define "service.fullname" -}}
+{{- if .Values.fullnameOverride }}
+{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- $name := default .Chart.Name .Values.nameOverride }}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
+
+{{- define "service.labels" -}}
+app: {{ include "service.fullname" . }}
+{{ range .Values.labels }}
+{{ .name }}: {{ .value }}
+{{- end }}
+{{- end }}
+
+{{- define "service.image" -}}
+{{ printf "%s:%s" 
+    (.Values.image.repository | required "You must specify .Values.image.repository") 
+    (.Values.image.tag | default "latest") }}
+{{- end }}
+
+
+
+{{- define "service.resources" -}}
+requests:
+{{ printf "memory: %s" .Values.resources.memory | indent 2 }}
+{{ printf "cpu: %s" .Values.resources.cpu | indent 2 }}
+limits:
+{{ printf "memory: %s" .Values.resources.memory | indent 2 }}
+{{ printf "cpu: %sm" (mul (atoi (
+    trimSuffix "m" ( toString .Values.resources.cpu))) 4  
+    | toString ) | indent 2 }}
+{{- end -}}

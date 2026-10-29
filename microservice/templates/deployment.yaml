@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "service.fullname" . }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels: {{ include "service.labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{ include "service.labels" . | nindent 8 }}
+    spec:
+      volumes: {{ .Values.volumes.list | toYaml | nindent 8 }}
+      containers:
+        - name: {{ include "service.fullname" . }}-app
+          image: {{ include "service.image" . }}
+          command: {{ if .Values.command }}
+            {{- printf "['sh', '-c', '%s']" .Values.command }}
+            {{- end }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          resources: {{ include "service.resources" . | nindent 12 }}
+          envFrom: {{ if .Values.environment.envFrom }}
+            {{ .Values.environment.envFrom | toYaml | indent 12 }}
+            {{ else }}
+            - configMapRef:
+                name: {{ include "service.fullname" . }}-config
+                optional: true
+            {{- end }}
+          env: {{- range .Values.environment.env -}}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+
+          livenessProbe: {{ .Values.probes.liveness | toYaml | nindent 12 }}
+          readinessProbe: {{ .Values.probes.readiness | toYaml | nindent 12 }}
+          startupProbe: {{ .Values.probes.startup | toYaml | nindent 12 }}
+
+          volumeMounts: {{ .Values.volumes.mounts | toYaml | nindent 12 }}

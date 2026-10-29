@@ -1,0 +1,45 @@
+annotations:
+
+labels:
+
+image:
+  repository: default
+  tag: latest
+
+replicas: 1
+
+resources:
+  memory: 256Mi
+  cpu: 200m
+
+service:
+  port: # for external traffic
+  targetPort: # port in container
+  type: ClusterIP
+
+command:
+
+environment:
+  # secret:
+  configMap:
+  env:
+
+volumes:
+  declarations:
+  list:
+
+probes:
+  liveness:
+  readiness:
+  startup:
+# Create a new folder and migrate it to be a generic chart
+# push the chart to docker-hub/artifact-hub
+
+# The project should probably be part of my GitHub and showcase it,
+# Alon with setting random projects to private
+
+# Next possible directions:
+# a. Update chart automatically in Github Actions
+# b. Deploy apps that will actually work and keep updating the chart
+# c. Configure K3S with Terraform (VM, K3S, Argo plugins)
+######
