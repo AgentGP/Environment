@@ -11,8 +11,8 @@
 
 {{- define "service.labels" -}}
 app: {{ include "service.fullname" . }}
-{{ range .Values.labels }}
-{{ .name }}: {{ .value }}
+{{- range $name, $value := .Values.labels }}
+{{ $name }}: {{ $value }}
 {{- end }}
 {{- end }}
 
