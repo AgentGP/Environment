@@ -19,7 +19,7 @@ app: {{ include "service.fullname" . }}
 {{- define "service.image" -}}
 {{ printf "%s:%s" 
     (.Values.image.repository | required "You must specify .Values.image.repository") 
-    (.Values.image.tag | default "latest") }}
+    ((.Values.image.tag | toString) | default "latest") }}
 {{- end }}
 
 

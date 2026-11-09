@@ -1,0 +1,20 @@
+joplin:
+  image:
+    repository: joplin/server
+    tag: 2.2
+
+  service:
+    port: 22300 # in cluster traffic
+    targetPort: 22300 # port in container
+    nodePort: 30081
+    type: NodePort
+
+nginx:
+  image:
+    repository: nginx
+
+  service:
+    port: 8080 # for external traffic
+    targetPort: 80 # port in container
+    nodePort: 30080
+    type: NodePort

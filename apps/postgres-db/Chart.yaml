@@ -1,0 +1,10 @@
+apiVersion: v2
+name: postgres-db
+description: "my db for now"
+version: 1.0.0
+
+dependencies:
+  - name: microservice
+    version: "*"
+    repository: file://../../microservice
+    alias: postgres-db

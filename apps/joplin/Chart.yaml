@@ -1,0 +1,14 @@
+apiVersion: v2
+name: joplin
+description: "a note taking app"
+version: 1.0.0
+
+dependencies:
+  - name: microservice
+    version: "*"
+    repository: file://../../microservice
+    alias: joplin
+  - name: microservice
+    version: "*"
+    repository: file://../../microservice
+    alias: nginx
