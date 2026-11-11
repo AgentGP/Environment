@@ -3,13 +3,16 @@ joplin:
     repository: joplin/server
     tag: 2.2
 
+  httpRoute:
+    enabled: true
+
   service:
     port: 22300 # in-cluster
     targetPort: 22300 # container
 
   environment:
     configMap:
-      APP_BASE_URL: http://10.110.164.136:22300 # public URL: minikube node IP + nodePort
+      APP_BASE_URL: http://joplin.localhost # public URL: minikube node IP + nodePort
       APP_PORT: 22300 # port Joplin listens on INSIDE the container; must match service.targetPort
 
 

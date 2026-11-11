@@ -20,6 +20,9 @@ service:
   name:
   type: ClusterIP
 
+httpRoute:
+  enabled: false
+
 command:
 
 environment:
