@@ -4,17 +4,30 @@ joplin:
     tag: 2.2
 
   service:
-    port: 22300 # in cluster traffic
-    targetPort: 22300 # port in container
-    nodePort: 30081
-    type: NodePort
+    port: 22300 # in-cluster
+    targetPort: 22300 # container
+    type: LoadBalancer
 
-nginx:
-  image:
-    repository: nginx
+  environment:
+    configMap:
+      APP_BASE_URL: http://10.110.164.136:22300 # public URL: minikube node IP + nodePort
+      APP_PORT: 22300 # port Joplin listens on INSIDE the container; must match service.targetPort
 
-  service:
-    port: 8080 # for external traffic
-    targetPort: 80 # port in container
-    nodePort: 30080
-    type: NodePort
+
+      # Postgres
+      # DB_CLIENT: pg
+      # POSTGRES_PASSWORD: joplin
+      # POSTGRES_DATABASE: joplin
+      # POSTGRES_USER: joplin
+      # POSTGRES_PORT: 5432
+      # POSTGRES_HOST: localhost
+
+# nginx:
+#   image:
+#     repository: nginx
+
+#   service:
+#     port: 8080 # for external traffic
+#     targetPort: 80 # port in container
+#     nodePort: 30080
+#     type: NodePort

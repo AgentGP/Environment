@@ -8,7 +8,7 @@ dependencies:
     version: "*"
     repository: file://../../microservice
     alias: joplin
-  - name: microservice
-    version: "*"
-    repository: file://../../microservice
-    alias: nginx
+  # - name: microservice
+  #   version: "*"
+  #   repository: file://../../microservice
+  #   alias: nginx
