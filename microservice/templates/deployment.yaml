@@ -20,11 +20,15 @@ spec:
           ports:
             - containerPort: {{ .Values.service.targetPort }}
           resources: {{ include "service.resources" . | nindent 12 }}
-          envFrom: {{ if .Values.environment.envFrom }}
-            {{ .Values.environment.envFrom | toYaml | indent 12 }}
-            {{ else }}
+          envFrom: 
+            {{- if .Values.environment.envFrom }}
+            {{- .Values.environment.envFrom | toYaml | indent 12 }}
+            {{- else }}
             - configMapRef:
                 name: {{ include "service.fullname" . }}-config
+                optional: true
+            - secretRef:
+                name: {{ include "service.fullname" . }}-secret
                 optional: true
             {{- end }}
           {{- $dict := merge dict
