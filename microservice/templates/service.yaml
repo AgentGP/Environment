@@ -5,11 +5,17 @@ metadata:
 spec:
   selector:
     app: {{ include "service.fullname" . }}
+  {{- with .Values.service }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.targetPort }}
+    - port: {{ .port }}
+      targetPort: {{ .targetPort }}
 
-      {{- with .Values.service.nodePort }}
+      {{- with .name }}
+      name: {{ . }}
+      {{- end }}
+
+      {{- with .nodePort }}
       nodePort: {{ . }}
       {{- end }}
-  type: {{ .Values.service.type }}
+  type: {{ .type }}
+  {{- end }}

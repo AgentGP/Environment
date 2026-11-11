@@ -17,6 +17,7 @@ resources:
 service:
   port: # for external traffic
   targetPort: # port in container
+  name:
   type: ClusterIP
 
 command:
