@@ -1,0 +1,5 @@
+# services/traefik/values.yaml
+traefik:
+  providers:
+    kubernetesGateway:
+      enabled: true

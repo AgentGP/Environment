@@ -1,0 +1,9 @@
+apiVersion: v2
+name: Traefik
+description: "my gateway for the app (hopefully)"
+version: 1.0.0
+
+dependencies:
+  - name: traefik
+    repository: https://traefik.github.io/charts
+    version: 42.3.1

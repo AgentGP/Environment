@@ -6,7 +6,6 @@ joplin:
   service:
     port: 22300 # in-cluster
     targetPort: 22300 # container
-    type: LoadBalancer
 
   environment:
     configMap:
