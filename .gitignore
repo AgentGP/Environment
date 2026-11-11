@@ -2,3 +2,7 @@ tmp
 venv
 *tgz
 .env*
+commands
+
+# temporary to store secrets locally:
+values-secret.yaml 
