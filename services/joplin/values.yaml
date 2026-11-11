@@ -3,6 +3,10 @@ global:
     secret:
       POSTGRES_PASSWORD: "choose your password"
 
+    configMap:
+      POSTGRES_USER: joplin
+      POSTGRES_DB: joplin
+
 joplin:
   image:
     repository: joplin/server
@@ -22,10 +26,11 @@ joplin:
 
       # Postgres
       DB_CLIENT: pg
-      POSTGRES_DATABASE: joplin
-      POSTGRES_USER: joplin
       POSTGRES_PORT: 5432
-      POSTGRES_HOST: http://joplin-postgres
+      POSTGRES_HOST: joplin-postgres
+
+    env:
+      POSTGRES_DATABASE: $(POSTGRES_DB) # Hopefully it will work
 
 postgres:
   image:
@@ -36,9 +41,6 @@ postgres:
     port: 5432 # in cluster traffic
     targetPort: 5432 # port in container
 
-  environment:
-    configMap:
-      POSTGRES_USER: joplin
-      POSTGRES_DB: joplin
 
-  # volumes: ./data/postgres/pgdata:/var/lib/postgresql/data/pgdata
+  # Todo
+  # volumes: /var/lib/postgresql/data/pgdata
