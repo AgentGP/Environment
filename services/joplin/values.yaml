@@ -1,3 +1,8 @@
+global:
+  environment:
+    secret:
+      POSTGRES_PASSWORD: "choose your password"
+
 joplin:
   image:
     repository: joplin/server
@@ -15,21 +20,25 @@ joplin:
       APP_BASE_URL: http://joplin.localhost # public URL: minikube node IP + nodePort
       APP_PORT: 22300 # port Joplin listens on INSIDE the container; must match service.targetPort
 
-
       # Postgres
-      # DB_CLIENT: pg
-      # POSTGRES_PASSWORD: joplin
-      # POSTGRES_DATABASE: joplin
-      # POSTGRES_USER: joplin
-      # POSTGRES_PORT: 5432
-      # POSTGRES_HOST: localhost
+      DB_CLIENT: pg
+      POSTGRES_DATABASE: joplin
+      POSTGRES_USER: joplin
+      POSTGRES_PORT: 5432
+      POSTGRES_HOST: http://postgres
 
-# nginx:
-#   image:
-#     repository: nginx
+postgres:
+  image:
+    repository: postgres
+    tag: 15
 
-#   service:
-#     port: 8080 # for external traffic
-#     targetPort: 80 # port in container
-#     nodePort: 30080
-#     type: NodePort
+  service:
+    port: 5432 # in cluster traffic
+    targetPort: 5432 # port in container
+
+  environment:
+    configMap:
+      POSTGRES_USER: joplin
+      POSTGRES_DB: joplin
+
+  # volumes: ./data/postgres/pgdata:/var/lib/postgresql/data/pgdata

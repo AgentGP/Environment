@@ -1,6 +1,0 @@
-dependencies:
-- name: microservice
-  repository: file://../../microservice
-  version: 1.0.0
-digest: sha256:64c3913e1d5349aa346d6473396394f6b6244c97a962f58aecaad9c523a52c42
-generated: "2026-11-09T12:01:46.5430023+02:00"
