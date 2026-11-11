@@ -1,10 +1,13 @@
-{{- if not (empty .Values.environment.configMap) }}
+{{- $dict := merge dict
+  .Values.environment.configMap 
+  .Values.global.environment.configMap }}
+{{- if not (empty $dict) }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "service.fullname" . }}-config
-data: 
-  {{- range $name, $value := .Values.environment.configMap }}
+data:
+  {{- range $name, $value := $dict }}
   {{ $name }}: {{ $value | quote }}
   {{- end }}
 {{- end }}

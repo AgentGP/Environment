@@ -1,8 +1,14 @@
 # Default Values
+global:
+  annotations: {}
+  labels: {}
+  environment:
+    secret: {}
+    configMap: {}
+    env: {}
 
-annotations:
-
-labels:
+annotations: {}
+labels: {}
 
 image:
   repository: default
@@ -26,9 +32,9 @@ httpRoute:
 command:
 
 environment:
-  # secret:
-  configMap:
-  env:
+  secret: {}
+  configMap: {}
+  env: {}
 
 volumes:
   declarations:
