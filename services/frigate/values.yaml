@@ -1,0 +1,16 @@
+frigate:
+  image:
+    repository: ghcr.io/blakeblackshear/frigate
+    tag: stable
+
+  httpRoute:
+    enabled: true
+
+  service:
+    port: 22300 # in-cluster
+    targetPort: 22300 # container
+
+  environment:
+    configMap:
+
+  # volumes:

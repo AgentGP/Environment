@@ -1,0 +1,10 @@
+apiVersion: v2
+name: frigate
+description: "a note taking app"
+version: 1.0.0
+
+dependencies:
+  - name: microservice
+    version: "*"
+    repository: file://../../microservice
+    alias: frigate
