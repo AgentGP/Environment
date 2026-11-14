@@ -25,9 +25,9 @@ frigate:
         enabled: true
         ffmpeg:
           inputs:
-            - path: rtsp://192.168.68.123:554
+            - path: rtsp://{FRIGATE_RTSP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@192.168.68.123:554
               roles:
-                - detect
+                - record
         detect:
           width: 1280
           height: 720
