@@ -4,7 +4,7 @@ description: "a note taking app"
 version: 1.0.0
 
 dependencies:
-  - name: microservice
+  - name: frigate
     version: "*"
-    repository: file://../../microservice
-    alias: frigate
+    repository: https://blakeblackshear.github.io/blakeshome-charts/
+    # alias: frigate

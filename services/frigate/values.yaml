@@ -1,16 +1,34 @@
+# Wrapper-chart route (templates/httpRoute.yaml), same pattern as joplin
+httpRoute:
+  enabled: true
+  hostname: frigate.localhost
+  port: 8971 # "http-auth" port: Frigate UI with login. 5000 is the unauthenticated internal port.
+
 frigate:
-  image:
-    repository: ghcr.io/blakeblackshear/frigate
-    tag: stable
+  # Frigate config (rendered into a ConfigMap, mounted read-only at /config/config.yml)
+  config: |
+    mqtt:
+      enabled: false
 
-  httpRoute:
-    enabled: true
+    # Port 8971 (login-protected UI) serves plain HTTP; Traefik in front handles the edge.
+    tls:
+      enabled: false
 
-  service:
-    port: 22300 # in-cluster
-    targetPort: 22300 # container
+    detectors:
+      cpu1:
+        type: cpu
 
-  environment:
-    configMap:
-
-  # volumes:
+    cameras:
+      # Placeholder so the config validates. Replace the path with your real
+      # camera's RTSP URL and set enabled: true.
+      intercom:
+        enabled: true
+        ffmpeg:
+          inputs:
+            - path: rtsp://192.168.68.123:554
+              roles:
+                - detect
+        detect:
+          width: 1280
+          height: 720
+          fps: 5

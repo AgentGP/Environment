@@ -1,6 +1,6 @@
 dependencies:
-- name: microservice
-  repository: file://../../microservice
-  version: 1.0.0
-digest: sha256:297f5e1f73f2752b324b92e0ed0b20fc03e88ccaeecb2a0ed78c96d0d806bfb9
-generated: "2026-11-12T13:10:08.0835593+02:00"
+- name: frigate
+  repository: https://blakeblackshear.github.io/blakeshome-charts/
+  version: 7.8.0
+digest: sha256:93b785c8a5b1b6efbb3ed908d46020e2f706c4066f030c4d1eda5f5829f6d1e7
+generated: "2026-11-12T13:31:33.1066828+02:00"
